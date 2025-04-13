@@ -15,7 +15,8 @@ useHead({
     { charset: 'utf-8' }
   ],
   link: [
-    { rel: 'stylesheet', href: '/css/style.css' } 
+    { rel: 'stylesheet', href: '/css/style.css' },
+    { rel: 'stylesheet', href: '/css/custom.css' } 
   ],
   script: [
     { src: '/js/script.js' }
