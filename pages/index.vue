@@ -8,32 +8,33 @@
     <div class="container">
         <div class="row">
             <div v-if="pending">
-                <div class="alert alert-warning" role="alert">
+                <div class="alert alert-info" role="alert">
                     Loading ...
                 </div>
             </div>
             <div v-else-if="error">
                 <div class="alert alert-danger" role="alert">
-                    Something Went Wrong!
+                    Something Went Wrong! {{ error.message }}
                 </div>
             </div>
-            <NewsCard v-else v-for="n in data?.news" :key="n.title" :news="n" />
+            <NewsCard v-else v-for="n in data" :key="n.title" :news="n" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-    import { type NewsResponse } from "~/types/news";
+    import { type News } from "~/types/news";
     import NewsCard from "~/components/NewsCard.vue";
 
-    const { data, pending, error } = await useAsyncData<NewsResponse>('news', () =>
-    $fetch("https://hltv-api.vercel.app/api/news.json", {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        },
-    })); 
+    const { data, pending, error } = await useAsyncData<News[]>('news', () =>
+        $fetch("https://hltv-api.vercel.app/api/news.json", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        })
+    ); 
 </script>
 
 <style scoped>

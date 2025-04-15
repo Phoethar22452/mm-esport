@@ -4,7 +4,3 @@ export interface News {
     link:        string;
     time:        Date;
 }
-
-export interface NewsResponse {
-    news: News[];
-}
